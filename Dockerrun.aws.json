@@ -1,0 +1,64 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "nickchanch/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "nickchanch/multi-server",
+      "hostname": "api",
+      "essential": false,
+      "environment": [
+        {
+          "name": "REDIS_HOST",
+          "value": "$REDIS_HOST"
+        },
+        {
+          "name": "REDIS_PORT",
+          "value": "$REDIS_PORT"
+        },
+        {
+          "name": "PGUSER",
+          "value": "$PGUSER"
+        },
+        {
+          "name": "PGHOST",
+          "value": "$PGHOST"
+        },
+        {
+          "name": "PGDATABASE",
+          "value": "$PGDATABASE"
+        },
+        {
+          "name": "PGPASSWORD",
+          "value": "$PGPASSWORD"
+        },
+        {
+          "name": "PGPORT",
+          "value": "$PGPORT"
+        }
+      ]
+    },
+    {
+      "name": "worker",
+      "image": "nickchanch/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "nickchanch/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ]
+    }
+  ]
+}
