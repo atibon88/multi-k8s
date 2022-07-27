@@ -1,16 +1,19 @@
 {
+  "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
       "name": "client",
       "image": "nickchanch/multi-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "server",
       "image": "nickchanch/multi-server",
       "hostname": "api",
       "essential": false,
+      "memory": 128,
       "environment": [
         {
           "name": "REDIS_HOST",
@@ -46,13 +49,15 @@
       "name": "worker",
       "image": "nickchanch/multi-worker",
       "hostname": "worker",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "nginx",
       "image": "nickchanch/multi-nginx",
       "hostname": "nginx",
       "essential": true,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": 80,
