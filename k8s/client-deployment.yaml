@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+# Create n pods using template below
+  replicas: 3
+  selector:
+    matchLabels:
+      component: web
+# Template is spec of each pod
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: nickchanch/multi-client
+          ports:
+            - containerPort: 3000
