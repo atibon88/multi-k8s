@@ -13,8 +13,13 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
     # Add HTTPS support
 spec:
+  tls:
+    - hosts:
+        - sostrongind.com
+        - www.sostrongind.com
+      secretName: sostrongind-com
   rules:
-    - hosts: sostrongind.com
+    - host: sostrongind.com
       http:
         paths:
           - path: /?(.*)
@@ -37,7 +42,7 @@ spec:
                 name: server-cluster-ip-service
                 port:
                   number: 5000
-    - hosts: www.sostrongind.com
+    - host: www.sostrongind.com
       http:
         paths:
           - path: /?(.*)
